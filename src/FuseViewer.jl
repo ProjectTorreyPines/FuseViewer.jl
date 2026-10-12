@@ -1,29 +1,25 @@
 # FuseViewer — interactive Makie GUI for inspecting time-dependent FUSE data.
 #
-# Workflow (see setup.jl):
+# Usage:
 #
-#   Your terminal:   julia --project=@v1.11 fuseviewer/setup.jl
-#   At the prompt:   FuseViewer.launch(dd_sim, dd_exp)
-#
-# From a notebook (IJulia/Pluto) there is no splash to click through — name
-# the directory directly:
-#
-#   include("fuseviewer/fuseviewer.jl")
+#   using FuseViewer
 #   FuseViewer.open_dir("/path/to/shot")                       # GLMakie window
 #   fig = FuseViewer.open_dir("/path/to/shot"; display_window=false)  # inline
+#   FuseViewer.launch(dd_sim, dd_exp)                          # dd's in memory
+#   FuseViewer.start()                                         # splash / picker
 #
 # `display_window=false` skips `display(fig)` (and the closeall that precedes
-# it) and hands back the Figure, so the notebook renders it with whatever
+# it) and hands back the Figure, so a notebook renders it with whatever
 # backend is active. Note that a static inline render loses the slider and
 # toggles; keep the default GLMakie window for interactive work.
 #
 # There is no dependency on a native file dialog: directories are typed into
 # a Textbox or passed as an argument, so the module loads anywhere Makie does.
 #
-# Revise picks up edits to this file. After a layout change, close the
-# window and call `launch` again. After an in-place change inside a panel
-# builder, no relaunch is needed — the new code runs on the next plot
-# update.
+# With `using Revise` before `using FuseViewer`, edits to this file are picked
+# up. After a layout change, close the window and call `launch` again. After
+# an in-place change inside a panel builder, no relaunch is needed — the new
+# code runs on the next plot update.
 
 module FuseViewer
 
@@ -2024,7 +2020,7 @@ Block the calling thread until all FuseViewer windows have been closed.
 Use this in non-interactive scripts (without `julia -i`) so Julia does not
 exit while the viewer is still open.
 
-    julia --project=@v1.11 fuseviewer/setup.jl   # no -i needed
+    julia -e 'using FuseViewer; FuseViewer.start(); FuseViewer.wait_for_close()'
 """
 function wait_for_close(; timeout=30.0)
     # Wait up to `timeout` seconds for the first screen to appear.
