@@ -4,20 +4,22 @@ Interactive Makie GUI for inspecting time-dependent [FUSE](https://github.com/Pr
 
 ## Installation
 
-FuseViewer is an unregistered Julia package (Julia 1.11+). Add it by URL to the environment you run FUSE from:
+FuseViewer (Julia 1.11+) is registered in [FuseRegistry](https://github.com/ProjectTorreyPines/FuseRegistry.jl). If you have FUSE installed you already have that registry; otherwise add it first:
 
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/ProjectTorreyPines/FuseViewer.jl")
+pkg"registry add https://github.com/ProjectTorreyPines/FuseRegistry.jl.git"
 ```
 
-To work on the viewer itself, use `Pkg.develop` instead, which clones an editable copy to `~/.julia/dev/FuseViewer`:
+Then:
 
 ```julia
-Pkg.develop(url="https://github.com/ProjectTorreyPines/FuseViewer.jl")
+Pkg.add("FuseViewer")
 ```
 
-Its dependencies are GLMakie, Makie, IMAS and IMASdd. IMAS and IMASdd come from [FuseRegistry](https://github.com/ProjectTorreyPines/FuseRegistry.jl), so that registry must be added first if the environment does not already have FUSE installed.
+To work on the viewer itself, use `Pkg.develop("FuseViewer")` instead, which clones an editable copy to `~/.julia/dev/FuseViewer`.
+
+Its dependencies are GLMakie, Makie, IMAS and IMASdd.
 
 ## Usage
 
