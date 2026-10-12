@@ -801,7 +801,7 @@ function start(; default_dir::AbstractString=pwd())
     rowgap!(fig.layout, 14)
     _active_screen[] = display(fig)
     _active_fig[] = fig
-    return fig
+    return nothing
 end
 
 """
@@ -1854,6 +1854,7 @@ in black) for side-by-side comparison.
 Pick views from the `view:` dropdown in the control row. Currently
 implemented: Summary, Magnetics.
 
+By default the window is opened and `nothing` is returned.
 `display_window=false` returns the Figure without calling `display` — use it
 from a notebook that renders the figure itself. The widgets only respond
 under an interactive backend, so the default (a GLMakie window) is still the
@@ -2010,7 +2011,9 @@ function launch(dd_sim::IMAS.dd, dd_exp::Union{Nothing,IMAS.dd}=nothing;
         _active_screen[] = display(fig)
     end
     _active_fig[] = fig
-    return fig
+    # Windowed mode returns nothing: a notebook would otherwise also render
+    # the returned Figure inline as a static copy of the window.
+    return display_window ? nothing : fig
 end
 
 """
