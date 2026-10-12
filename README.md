@@ -49,3 +49,7 @@ using FuseViewer
 ```
 
 Run the tests with `Pkg.test("FuseViewer")`.
+
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE).
